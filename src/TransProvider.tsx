@@ -10,6 +10,7 @@ export const TransProvider = <Locale extends string = string>({
   children,
   trans,
   translations,
+  initLocale,
 }: TransProviderProps<Locale>): React.ReactElement => {
   const [loading, setLoading] = useState(false);
   const [updatedTrigger, toggleUpdatedTrigger] = useReducer((v) => !v, false);
@@ -28,12 +29,12 @@ export const TransProvider = <Locale extends string = string>({
   useEffect(() => {
     trans.addEventListener('loadstart', loadstart);
     trans.addEventListener('loadend', loadend);
-    trans.init({ translations, locale: 'ru' as Locale });
+    trans.init({ translations, locale: initLocale });
     return (): void => {
       trans.removeEventListener('loadstart', loadstart);
       trans.removeEventListener('loadend', loadend);
     };
-  }, [loadend, loadstart, trans, translations]);
+  }, [initLocale, loadend, loadstart, trans, translations]);
 
   const value = useMemo<ContextType<Locale>>(
     () => ({ loading, trans, updatedTrigger }),

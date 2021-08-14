@@ -1,8 +1,8 @@
 import React from 'react';
-import { EventsManager } from 'tiny-trans';
+import { Trans } from './src';
 
 export type Content = Record<string, unknown>;
-export type DynamicContent<T extends Content> = () => Promise<{ default: T }>;
+export type DynamicContent = () => Promise<{ default: Content }>;
 export type Variables = Record<string, string>;
 export type ErrorsMode = 'ignore' | 'throw' | ((error: Error) => string);
 export type PluralContent = Partial<Record<Intl.LDMLPluralRule, string>>;
@@ -37,33 +37,23 @@ export type TranslateProps<T extends Variables = Variables> = {
   changeLocale: (locale: string) => Promise<void>;
 };
 
-export declare class Trans<Locale extends string = string> extends EventsManager {
-  locale: Locale;
-
-  content: Content;
-
-  init<T extends Content>(params: {
-    translations: Record<Locale, T>;
-    locale: Locale;
-    pluralRecord?: Record<Locale, PluralFn>;
-  }): Promise<void>;
-
-  init<T extends Content>(params: {
-    translations: Record<Locale, DynamicContent<T>>;
-    locale: Locale;
-    pluralRecord?: Record<Locale, PluralFn>;
-  }): Promise<void>;
-
-  changeLocale(locale: Locale): Promise<void>;
-
-  createTranslate<T extends Variables = Variables>(module: string | TemplateStringsArray): Translate<T>;
-}
-
-export type TransProviderProps<Locale extends string = string> = {
+export interface TransProviderCommonProps<Locale extends string = string> {
   children: React.ReactChildren | React.ReactNode;
   trans: Trans<Locale>;
-  translations: any;
-};
+  initLocale: Locale;
+  pluralRecord?: Record<Locale, PluralFn>;
+}
+
+export interface SimpleTranslation<Locale extends string = string> {
+  translations: Record<Locale, Content>;
+}
+
+export interface DynamicTranslation<Locale extends string = string> {
+  translations: Record<Locale, DynamicContent>;
+}
+
+export type TransProviderProps<Locale extends string = string> = TransProviderCommonProps<Locale> &
+  (SimpleTranslation<Locale> | DynamicTranslation<Locale>);
 
 export type ContextType<Locale extends string = string> = {
   loading: boolean;
