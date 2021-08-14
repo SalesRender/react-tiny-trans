@@ -1,15 +1,33 @@
 {
-  "name": "react-trans",
+  "name": "react-tiny-trans",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
-  "sideEffects": [
-    "**/*.sass"
+  "description": "simple localisation manager for react",
+  "author": {
+    "name": "Igor Zvyagin",
+    "email": "spirit-drive@yandex.ru"
+  },
+  "keywords": [
+    "localisation",
+    "locale"
   ],
+  "homepage": "https://github.com/spirit-drive/react-tiny-trans",
+  "bugs": "https://github.com/spirit-drive/react-tiny-trans/issues",
+  "repository": "git@github.com:spirit-drive/react-tiny-trans.git",
+  "main": "dist/main.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "readmeFilename": "README.md",
+  "testling": {
+    "files": "*/**test.js"
+  },
+  "sideEffects": false,
   "scripts": {
     "start": "webpack serve --mode development",
     "lint": "eslint --fix src",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production -c ./webpack.config.prod.js",
     "test": "jest src",
     "heroku-push": "git push heroku master",
     "prepare": "husky install"
@@ -107,6 +125,6 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "trans": "https://github.com/spirit-drive/trans"
+    "tiny-trans": "https://github.com/spirit-drive/tiny-trans"
   }
 }

@@ -1,6 +1,6 @@
-import { Translate, Variables } from 'trans/index';
 import React, { useMemo } from 'react';
 import { useTransContext } from './TransProvider';
+import { Translate, TranslateProps, Variables } from './types';
 
 const createMemoTranslate = (translate: Translate): Translate => {
   const map: Record<string, string> = {};
@@ -13,23 +13,18 @@ const createMemoTranslate = (translate: Translate): Translate => {
   };
 };
 
-export type TranslateProps<T extends Variables = Variables> = {
-  translate: Translate<T>;
-  locale: string;
-  changeLocale: (locale: string) => Promise<void>;
-};
-
 export const useTranslate = <T extends Variables = Variables>(
   module: string | TemplateStringsArray
 ): TranslateProps<T> => {
-  const trans = useTransContext();
+  const { trans, updatedTrigger } = useTransContext();
+  const translate = useMemo(() => createMemoTranslate(trans.createTranslate(module)), [module, trans, updatedTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
   return useMemo(
     () => ({
       locale: trans.locale,
       changeLocale: trans.changeLocale,
-      translate: createMemoTranslate(trans.createTranslate(module)),
+      translate,
     }),
-    [module, trans]
+    [translate, trans]
   );
 };
 

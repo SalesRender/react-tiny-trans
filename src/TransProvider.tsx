@@ -1,15 +1,44 @@
-import React, { createContext, memo, useContext } from 'react';
-import { Trans } from 'trans';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import { ContextType, TransProviderProps } from './types';
 
-export type Props = {
-  trans: Trans;
-  children: React.ReactChildren | React.ReactNode;
+const TransContext = createContext<ContextType>(null);
+
+export const useTransContext = <Locale extends string = string>(): ContextType<Locale> =>
+  useContext(TransContext) as ContextType<Locale>;
+
+export const TransProvider = <Locale extends string = string>({
+  children,
+  trans,
+  translations,
+}: TransProviderProps<Locale>): React.ReactElement => {
+  const [loading, setLoading] = useState(false);
+  const [updatedTrigger, toggleUpdatedTrigger] = useReducer((v) => !v, false);
+
+  const loadstart = useCallback(() => {
+    requestAnimationFrame(() => setLoading(true));
+  }, []);
+
+  const loadend = useCallback(() => {
+    requestAnimationFrame(() => {
+      setLoading(false);
+      toggleUpdatedTrigger();
+    });
+  }, []);
+
+  useEffect(() => {
+    trans.addEventListener('loadstart', loadstart);
+    trans.addEventListener('loadend', loadend);
+    trans.init({ translations, locale: 'ru' as Locale });
+    return (): void => {
+      trans.removeEventListener('loadstart', loadstart);
+      trans.removeEventListener('loadend', loadend);
+    };
+  }, [loadend, loadstart, trans, translations]);
+
+  const value = useMemo<ContextType<Locale>>(
+    () => ({ loading, trans, updatedTrigger }),
+    [updatedTrigger, trans, loading]
+  );
+
+  return <TransContext.Provider value={value}>{children}</TransContext.Provider>;
 };
-
-const TransContext = createContext<Trans>(null);
-
-export const useTransContext = (): Trans => useContext(TransContext);
-
-export const TransProvider = memo<Props>(({ trans, children }) => (
-  <TransContext.Provider value={trans}>{children}</TransContext.Provider>
-));
