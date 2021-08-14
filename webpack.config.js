@@ -2,7 +2,6 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const port = 8080;
@@ -67,7 +66,6 @@ module.exports = (_, options) => {
       ],
     },
     plugins: [
-      new CleanWebpackPlugin(),
       new HtmlPlugin({
         template: 'index.html',
         minify: {

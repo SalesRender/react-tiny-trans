@@ -1,6 +1,5 @@
 import * as React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Trans } from './src';
+import { Trans } from 'tiny-trans';
 // import ru from './lang_ru.json';
 // import en from './lang_en.json';
 import { TransProvider } from './TransProvider';
