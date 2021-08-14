@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans, PluralFn, Content, DynamicContent, Variables, Translate } from 'tiny-trans';
 
-export { Trans, PluralFn, Content, DynamicContent, Variables, Translate } from 'tiny-trans';
+export { PluralFn, Content, DynamicContent, Variables, Translate } from 'tiny-trans';
 
 export type TranslateProps<T extends Variables = Variables> = {
   translate: Translate<T>;
@@ -33,15 +33,15 @@ export type ContextType<Locale extends string = string> = {
   trans: Trans<Locale>;
 };
 
-export declare type useTransContext = <Locale extends string = string>() => ContextType<Locale>;
-export declare type useTranslate = <T extends Variables = Variables>(
+export declare function useTransContext<Locale extends string = string>(): ContextType<Locale>;
+export declare function useTranslate<T extends Variables = Variables>(
   module: string | TemplateStringsArray
-) => TranslateProps<T>;
-export declare type TransProvider = <Locale extends string = string>(
+): TranslateProps<T>;
+export declare function TransProvider<Locale extends string = string>(
   params: TransProviderProps<Locale>
-) => React.ReactElement;
+): React.ReactElement;
 
-export type withTranslate = <P, T extends Variables = Variables>(
+export declare function withTranslate<P, T extends Variables = Variables>(
   Component: React.ComponentType<P & TranslateProps<T>>,
   module: string | TemplateStringsArray
-) => (props: P) => React.ReactElement;
+): (props: P) => React.ReactElement;
