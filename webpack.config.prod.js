@@ -16,6 +16,26 @@ module.exports ={
       type: 'umd',
     },
   },
+  externals: {
+    react: {
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+      root: 'React',
+    },
+    'react-dom': {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom',
+      root: 'ReactDOM',
+    },
+    'tiny-trans': {
+      commonjs: 'tiny-trans',
+      commonjs2: 'tiny-trans',
+      amd: 'tiny-trans',
+      root: 'Trans',
+    }
+  },
   devtool: 'source-map',
   resolve: {
     modules: [src, 'node_modules'],
