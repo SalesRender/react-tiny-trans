@@ -32,3 +32,16 @@ export type ContextType<Locale extends string = string> = {
   updatedTrigger: boolean;
   trans: Trans<Locale>;
 };
+
+export declare type useTransContext = <Locale extends string = string>() => ContextType<Locale>;
+export declare type useTranslate = <T extends Variables = Variables>(
+  module: string | TemplateStringsArray
+) => TranslateProps<T>;
+export declare type TransProvider = <Locale extends string = string>(
+  params: TransProviderProps<Locale>
+) => React.ReactElement;
+
+export type withTranslate = <P, T extends Variables = Variables>(
+  Component: React.ComponentType<P & TranslateProps<T>>,
+  module: string | TemplateStringsArray
+) => (props: P) => React.ReactElement;
