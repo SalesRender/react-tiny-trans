@@ -21,20 +21,20 @@ module.exports ={
     modules: [src, 'node_modules'],
     extensions: ['.tsx', '.ts', '.js'],
   },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        parallel: true,
-        terserOptions: {
-          output: {
-            comments: false,
-          },
-        },
-        extractComments: false,
-      }),
-    ],
-  },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [
+  //     new TerserPlugin({
+  //       parallel: true,
+  //       terserOptions: {
+  //         output: {
+  //           comments: false,
+  //         },
+  //       },
+  //       extractComments: false,
+  //     }),
+  //   ],
+  // },
   module: {
     rules: [
       {
