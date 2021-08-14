@@ -29,12 +29,15 @@ export const TransProvider = <Locale extends string = string>({
   useEffect(() => {
     trans.addEventListener('loadstart', loadstart);
     trans.addEventListener('loadend', loadend);
-    trans.init({ translations, locale: initLocale });
     return (): void => {
       trans.removeEventListener('loadstart', loadstart);
       trans.removeEventListener('loadend', loadend);
     };
-  }, [initLocale, loadend, loadstart, trans, translations]);
+  }, [loadend, loadstart, trans]);
+
+  useEffect(() => {
+    trans.init({ translations, locale: initLocale });
+  }, [initLocale, trans, translations]);
 
   const value = useMemo<ContextType<Locale>>(
     () => ({ loading, trans, updatedTrigger }),

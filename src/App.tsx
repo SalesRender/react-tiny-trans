@@ -15,7 +15,7 @@ enum Locale {
 }
 
 const trans = new Trans<Locale>();
-trans.init({ translations, locale: Locale.en });
+
 export const App: React.FC = () => (
   <TransProvider translations={translations} trans={trans} initLocale={Locale.ru}>
     <div>App</div>
