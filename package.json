@@ -122,9 +122,8 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
-  "peerDependencies": {
+  "dependencies": {
     "react": "latest",
     "tiny-trans": "https://github.com/spirit-drive/tiny-trans"
-  },
-  "dependencies": {}
+  }
 }
