@@ -10,10 +10,6 @@ module.exports ={
   entry: './index.ts',
   output: {
     path: dist,
-    library: {
-      name: ['useTransContext', 'useTranslate', 'withTranslate', 'TransProvider'],
-      type: 'umd',
-    },
     filename: 'bundle.js',
     libraryTarget: 'commonjs2',
   },
