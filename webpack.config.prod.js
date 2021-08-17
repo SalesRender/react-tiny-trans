@@ -1,6 +1,5 @@
 /* eslint-disable */
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 
 const dist = path.join(__dirname, 'dist');
 const src = path.join(__dirname, 'src');
@@ -36,20 +35,6 @@ module.exports ={
     modules: [src, 'node_modules'],
     extensions: ['.tsx', '.ts', '.js'],
   },
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       parallel: true,
-  //       terserOptions: {
-  //         output: {
-  //           comments: false,
-  //         },
-  //       },
-  //       extractComments: false,
-  //     }),
-  //   ],
-  // },
   module: {
     rules: [
       {
