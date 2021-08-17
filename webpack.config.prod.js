@@ -12,9 +12,10 @@ module.exports ={
     path: dist,
     library: {
       name: ['useTransContext', 'useTranslate', 'withTranslate', 'TransProvider'],
-      type: 'commonjs2',
+      type: 'umd',
     },
     filename: 'bundle.js',
+    libraryTarget: 'commonjs2',
   },
   externals: {
     react: {
@@ -23,12 +24,6 @@ module.exports ={
       amd: 'react',
       root: 'React',
     },
-    // 'tiny-trans': {
-    //   commonjs: 'tiny-trans',
-    //   commonjs2: 'tiny-trans',
-    //   amd: 'tiny-trans',
-    //   root: 'Trans',
-    // }
   },
   devtool: 'source-map',
   resolve: {
