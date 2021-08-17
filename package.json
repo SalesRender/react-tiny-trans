@@ -27,7 +27,7 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "lint": "eslint --fix src",
-    "build": "webpack --mode production -c ./webpack.config.prod.js",
+    "build": "webpack --mode development -c ./webpack.config.prod.js",
     "test": "jest src",
     "heroku-push": "git push heroku master",
     "prepare": "husky install"
