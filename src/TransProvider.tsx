@@ -1,4 +1,5 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import * as React from 'react';
+import { ReactElement, createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import { ContextType, TransProviderProps } from './types';
 
 const TransContext = createContext<ContextType>(null);
@@ -11,7 +12,7 @@ export const TransProvider = <Locale extends string = string>({
   trans,
   translations,
   initLocale,
-}: TransProviderProps<Locale>): React.ReactElement => {
+}: TransProviderProps<Locale>): ReactElement => {
   const [loading, setLoading] = useState(false);
   const [updatedTrigger, toggleUpdatedTrigger] = useReducer((v) => !v, false);
 
