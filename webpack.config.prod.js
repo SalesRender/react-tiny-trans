@@ -13,14 +13,11 @@ module.exports ={
     filename: 'bundle.js',
     libraryTarget: 'commonjs2',
   },
-  externals: {
-    react: {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react',
-      root: 'React',
-    },
-  },
+  externals: [
+    // Every non-relative module is external
+    // abc -> require("abc")
+    /^[a-z\-0-9]+$/,
+  ],
   devtool: 'source-map',
   resolve: {
     modules: [src, 'node_modules'],
