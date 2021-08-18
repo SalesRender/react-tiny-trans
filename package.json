@@ -123,7 +123,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "peerDependencies": {
-    "react": ">=17"
+    "react": ">=17",
+    "tiny-trans": ">=1"
   },
   "dependencies": {
     "react": "latest",
