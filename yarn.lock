@@ -8732,10 +8732,10 @@ thunky@^1.0.2:
   resolved "https://registry.npmjs.org/thunky/-/thunky-1.1.0.tgz"
   integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
 
-tiny-trans@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/tiny-trans/-/tiny-trans-1.0.9.tgz#0810ebcea85a21615dcd1278aac67a54e06fa3bf"
-  integrity sha512-8FVuCZbL05RZjw/LKslER1wnwhh411P1Y0kzQsKGGghHQsSpH89a6iB6BdtlEXe/evS8sbyPs8CcMjyGvYM9IA==
+tiny-trans@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/tiny-trans/-/tiny-trans-1.1.3.tgz#719fe9a77c9656b84068b13656b4bda8a7225c54"
+  integrity sha512-Zaqls6V10JpkFQaY71EY+no13lIxI2e/okFiC9HJMBuYE+Cy54+VBVZ0JBCYuCsUx+w2lEGLsalfMJj1SEh0Wg==
 
 tiny-warning@^1.0.2:
   version "1.0.3"
