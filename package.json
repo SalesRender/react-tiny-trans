@@ -1,6 +1,6 @@
 {
   "name": "react-tiny-trans",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "simple localisation manager for react",
   "author": {
@@ -9,7 +9,15 @@
   },
   "keywords": [
     "localisation",
-    "locale"
+    "internationalization",
+    "globalization",
+    "translation",
+    "tiny-trans",
+    "react-tiny-trans",
+    "react localisation",
+    "react internationalization",
+    "react globalization",
+    "react translation"
   ],
   "homepage": "https://github.com/spirit-drive/react-tiny-trans",
   "bugs": "https://github.com/spirit-drive/react-tiny-trans/issues",
