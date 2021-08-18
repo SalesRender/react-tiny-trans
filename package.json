@@ -127,7 +127,6 @@
     "tiny-trans": ">=1"
   },
   "dependencies": {
-    "react": "latest",
-    "tiny-trans": "latest"
+    "react": "latest"
   }
 }
