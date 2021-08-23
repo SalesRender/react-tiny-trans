@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useTransContext } from './TransProvider';
+import { useNeedUpdate, useTransContext } from './TransProvider';
 import { Translate, TranslateProps, Variables } from './types';
 
 const createMemoTranslate = (translate: Translate): Translate => {
@@ -16,7 +16,8 @@ const createMemoTranslate = (translate: Translate): Translate => {
 export const useTranslate = <T extends Variables = Variables>(
   module: string | TemplateStringsArray
 ): TranslateProps<T> => {
-  const { trans, updatedTrigger } = useTransContext();
+  const { trans } = useTransContext();
+  const updatedTrigger = useNeedUpdate();
   const translate = useMemo(() => createMemoTranslate(trans.createTranslate(module)), [module, trans, updatedTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
   return useMemo(
     () => ({

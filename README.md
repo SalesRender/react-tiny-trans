@@ -57,9 +57,7 @@ You can use different files for translates. Below I use follow example files
 }
 ```
 
-### Usage
-
-**TransProvider**
+### TransProvider
 ```
 import { Trans } from 'tiny-trans';
 import { TransProvider } from 'react-tiny-trans';
@@ -85,7 +83,7 @@ export const App: React.FC = () => (
 );
 ```
 
-**useTranslate**
+### useTranslate
 ```
 export const SomeComponent: React.FC = () => {
   /**
@@ -102,12 +100,11 @@ export const SomeComponent: React.FC = () => {
 };
 ```
 
-**useTransContext**
+### useTransContext
 ```
 export const SomeComponent: React.FC = () => {
   /**
-  * loading: boolean;
-  * updatedTrigger: boolean; 
+  * loading: boolean; // it changes during dynamic import
   * trans: Trans;
   */
   const { loading, updatedTrigger, trans } = useTransContext()
@@ -119,7 +116,7 @@ export const SomeComponent: React.FC = () => {
 };
 ```
 
-**withTranslate**
+### withTranslate
 ```
 /**
 * translate: Translate<T>;

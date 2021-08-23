@@ -29,7 +29,6 @@ export type TransProviderProps<Locale extends string = string> = TransProviderCo
 
 export type ContextType<Locale extends string = string> = {
   loading: boolean;
-  updatedTrigger: boolean;
   trans: Trans<Locale>;
 };
 

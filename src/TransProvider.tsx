@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { ReactElement, createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
-import { ContextType, TransProviderProps } from './types';
+import { ContextType, NeedUpdate, TransProviderProps } from './types';
 
 const TransContext = createContext<ContextType>(null);
+const NeedUpdateContext = createContext<NeedUpdate>(null);
 
 export const useTransContext = <Locale extends string = string>(): ContextType<Locale> =>
   useContext(TransContext) as ContextType<Locale>;
+
+export const useNeedUpdate = (): NeedUpdate => useContext(NeedUpdateContext);
 
 export const TransProvider = <Locale extends string = string>({
   children,
@@ -42,5 +45,9 @@ export const TransProvider = <Locale extends string = string>({
     [updatedTrigger, trans, loading]
   );
 
-  return <TransContext.Provider value={value}>{children}</TransContext.Provider>;
+  return (
+    <TransContext.Provider value={value}>
+      <NeedUpdateContext.Provider value={updatedTrigger}>{children}</NeedUpdateContext.Provider>
+    </TransContext.Provider>
+  );
 };

@@ -27,9 +27,10 @@ export interface DynamicTranslation<Locale extends string = string> {
 export type TransProviderProps<Locale extends string = string> = TransProviderCommonProps<Locale> &
   (SimpleTranslation<Locale> | DynamicTranslation<Locale>);
 
+export type NeedUpdate = boolean;
+
 export type ContextType<Locale extends string = string> = {
   loading: boolean;
-  updatedTrigger: boolean;
   trans: Trans<Locale>;
 };
 
