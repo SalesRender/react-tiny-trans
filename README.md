@@ -107,7 +107,7 @@ export const SomeComponent: React.FC = () => {
   * loading: boolean; // it changes during dynamic import
   * trans: Trans;
   */
-  const { loading, updatedTrigger, trans } = useTransContext()
+  const { loading, trans } = useTransContext()
   return (
     <div>
       ...
