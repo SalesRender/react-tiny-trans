@@ -13,10 +13,10 @@ const createMemoTranslate = (translate: Translate): Translate => {
   };
 };
 
-export const useTranslate = <T extends Variables = Variables>(
-  module: string | TemplateStringsArray
-): TranslateProps<T> => {
-  const { trans } = useTransContext();
+export const useTranslate = <Locale extends string = string, T extends Variables = Variables>(
+  module?: string | TemplateStringsArray
+): TranslateProps<Locale, T> => {
+  const { trans } = useTransContext<Locale>();
   const updatedTrigger = useNeedUpdate();
   const translate = useMemo(() => createMemoTranslate(trans.createTranslate(module)), [module, trans, updatedTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
   return useMemo(
@@ -30,11 +30,11 @@ export const useTranslate = <T extends Variables = Variables>(
 };
 
 export const withTranslate =
-  <P, T extends Variables = Variables>(
-    Component: React.ComponentType<P & TranslateProps<T>>,
-    module: string | TemplateStringsArray
+  <P, Locale extends string = string, T extends Variables = Variables>(
+    Component: React.ComponentType<P & TranslateProps<Locale, T>>,
+    module?: string | TemplateStringsArray
   ) =>
   (props: P): React.ReactElement => {
-    const trans = useTranslate(module);
+    const trans = useTranslate<Locale>(module);
     return <Component {...props} {...trans} />;
   };
