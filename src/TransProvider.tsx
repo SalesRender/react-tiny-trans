@@ -41,8 +41,8 @@ export const TransProvider = <Locale extends string = string>({
   }, [pluralRecord, initLocale, trans, translations]);
 
   const value = useMemo<ContextType<Locale>>(
-    () => ({ loading, trans, updatedTrigger }),
-    [updatedTrigger, trans, loading]
+    () => ({ loading, locale: initLocale, trans, updatedTrigger }),
+    [loading, initLocale, trans, updatedTrigger]
   );
 
   return (

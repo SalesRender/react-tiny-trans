@@ -31,6 +31,7 @@ export type NeedUpdate = boolean;
 
 export type ContextType<Locale extends string = string> = {
   loading: boolean;
+  locale: Locale;
   trans: Trans<Locale>;
 };
 
