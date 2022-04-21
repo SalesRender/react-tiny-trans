@@ -18,7 +18,7 @@ export const useTranslate = <Locale extends string = string, T extends Variables
 ): TranslateProps<Locale, T> => {
   const { trans, locale } = useTransContext<Locale>();
   const updatedTrigger = useNeedUpdate();
-  const translate = useMemo(() => createMemoTranslate(trans.createTranslate(module)), [module, trans, updatedTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
+  const translate = useMemo(() => trans.createTranslate(module), [module, trans, updatedTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
   return useMemo(
     () => ({
       locale: trans.locale || locale,
