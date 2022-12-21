@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactElement, createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import { ReactElement, createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { ContextType, NeedUpdate, TransProviderProps } from './types';
 
 const TransContext = createContext<ContextType>(null);
@@ -20,30 +20,25 @@ export const TransProvider = <Locale extends string = string>({
   const [loading, setLoading] = useState(false);
   const [updatedTrigger, toggleUpdatedTrigger] = useReducer((v) => !v, false);
 
-  const loadstart = useCallback(() => setLoading(true), []);
-  const loadend = useCallback(() => setLoading(false), []);
-
   useEffect(() => {
+    const loadstart = (): void => setLoading(true);
+    const loadend = (): void => setLoading(false);
+
     trans.addEventListener('loadstart', loadstart);
     trans.addEventListener('loadend', loadend);
-    trans.addEventListener('change-locale', toggleUpdatedTrigger);
     trans.addEventListener('init', toggleUpdatedTrigger);
     return (): void => {
       trans.removeEventListener('loadstart', loadstart);
       trans.removeEventListener('loadend', loadend);
-      trans.removeEventListener('change-locale', toggleUpdatedTrigger);
       trans.removeEventListener('init', toggleUpdatedTrigger);
     };
-  }, [loadend, loadstart, trans]);
+  }, [trans]);
 
   useEffect(() => {
     trans.init({ translations, locale: initLocale, pluralRecord });
   }, [pluralRecord, initLocale, trans, translations]);
 
-  const value = useMemo<ContextType<Locale>>(
-    () => ({ loading, locale: initLocale, trans, updatedTrigger }),
-    [loading, initLocale, trans, updatedTrigger]
-  );
+  const value: ContextType<Locale> = { loading, locale: initLocale, trans };
 
   return (
     <TransContext.Provider value={value}>

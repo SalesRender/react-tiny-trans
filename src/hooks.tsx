@@ -1,17 +1,6 @@
 import React, { useMemo } from 'react';
 import { useNeedUpdate, useTransContext } from './TransProvider';
-import { Translate, TranslateProps, Variables } from './types';
-
-const createMemoTranslate = (translate: Translate): Translate => {
-  const map: Record<string, string> = {};
-  return (path, options): string => {
-    const key = path?.toString();
-    if (key in map) return map[key];
-    const result = translate(path, options);
-    map[key] = result;
-    return result;
-  };
-};
+import { TranslateProps, Variables } from './types';
 
 export const useTranslate = <Locale extends string = string, T extends Variables = Variables>(
   module?: string | TemplateStringsArray
@@ -19,14 +8,11 @@ export const useTranslate = <Locale extends string = string, T extends Variables
   const { trans, locale } = useTransContext<Locale>();
   const updatedTrigger = useNeedUpdate();
   const translate = useMemo(() => trans.createTranslate(module), [module, trans, updatedTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
-  return useMemo(
-    () => ({
-      locale: trans.locale || locale,
-      changeLocale: trans.changeLocale,
-      translate,
-    }),
-    [translate, trans, locale]
-  );
+  return {
+    locale: trans.locale || locale,
+    changeLocale: trans.changeLocale,
+    translate,
+  };
 };
 
 export const withTranslate =
