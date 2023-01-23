@@ -26,10 +26,12 @@ export const TransProvider = <Locale extends string = string>({
 
     trans.addEventListener('loadstart', loadstart);
     trans.addEventListener('loadend', loadend);
+    trans.addEventListener('change-locale', toggleUpdatedTrigger);
     trans.addEventListener('init', toggleUpdatedTrigger);
     return (): void => {
       trans.removeEventListener('loadstart', loadstart);
       trans.removeEventListener('loadend', loadend);
+      trans.removeEventListener('change-locale', toggleUpdatedTrigger);
       trans.removeEventListener('init', toggleUpdatedTrigger);
     };
   }, [trans]);
