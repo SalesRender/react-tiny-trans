@@ -1,6 +1,6 @@
 {
   "name": "react-tiny-trans",
-  "version": "1.0.12",
+  "version": "2.0.0",
   "license": "MIT",
   "description": "simple localisation manager for react",
   "author": {
@@ -120,7 +120,7 @@
     "react-styleguidist": "^11.1.7",
     "react-test-renderer": "^17.0.2",
     "terser-webpack-plugin": "^5.1.4",
-    "tiny-trans": "^1.1.13",
+    "tiny-trans": "^2.0.0-doc",
     "ts-jest": "^27.0.4",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.1.0",
@@ -133,7 +133,7 @@
   },
   "peerDependencies": {
     "react": ">=17",
-    "tiny-trans": ">=1"
+    "tiny-trans": ">=2"
   },
   "dependencies": {
     "react": "latest"

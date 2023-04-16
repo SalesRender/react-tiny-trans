@@ -69,7 +69,10 @@ enum Locale {
   en = 'en',
 }
 
-const trans = new Trans<Locale>();
+const trans = new Trans<Locale>({
+  translations,
+  locale: Locale.ru
+});
 
 export const App: React.FC = () => (
   /**
@@ -77,7 +80,7 @@ export const App: React.FC = () => (
   * initLocale: Locale;
   * pluralRecord?: Record<Locale, PluralFn>;
   */
-  <TransProvider translations={translations} trans={trans} initLocale={Locale.ru}>
+  <TransProvider trans={trans}>
     ...
   </TransProvider>
 );
@@ -118,12 +121,13 @@ export const SomeComponent: React.FC = () => {
 
 ### withTranslate
 ```
+import { TranslateProps, withTranslate } from 'react-tiny-trans';
 /**
 * translate: Translate<T>;
 * locale: string;
 * changeLocale: (locale: string) => Promise<void>;
 */
-export const SomeComponent: React.FC = ({ translate, locale, changeLocale }) => {
+export const SomeComponent: React.FC<TranslateProps> = ({ translate, locale, changeLocale }) => {
   return (
     <div>
       {translate`anything`}
@@ -131,7 +135,10 @@ export const SomeComponent: React.FC = ({ translate, locale, changeLocale }) => 
   )
 };
 
-const TranslatedSomeComponent = withTranslate(SomeComponent, 'extrapoint');
+const TranslatedSomeComponent = withTranslate('extrapoint')(SomeComponent);
+// or
+const translated = withTranslate`extrapoint`;
+const TranslatedSomeComponent2 = translated(SomeComponent);
 ```
 
 About `translate`, `changeLocale` you can read in the [tiny-trans doc](https://www.npmjs.com/package/tiny-trans)

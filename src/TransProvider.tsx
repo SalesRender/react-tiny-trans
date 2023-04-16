@@ -13,9 +13,6 @@ export const useNeedUpdate = (): NeedUpdate => useContext(NeedUpdateContext);
 export const TransProvider = <Locale extends string = string>({
   children,
   trans,
-  translations,
-  initLocale,
-  pluralRecord,
 }: TransProviderProps<Locale>): ReactElement => {
   const [loading, setLoading] = useState(false);
   const [updatedTrigger, toggleUpdatedTrigger] = useReducer((v) => !v, false);
@@ -37,10 +34,10 @@ export const TransProvider = <Locale extends string = string>({
   }, [trans]);
 
   useEffect(() => {
-    trans.init({ translations, locale: initLocale, pluralRecord });
-  }, [pluralRecord, initLocale, trans, translations]);
+    trans.init();
+  }, [trans]);
 
-  const value: ContextType<Locale> = { loading, locale: initLocale, trans };
+  const value: ContextType<Locale> = { loading, locale: trans.locale, trans };
 
   return (
     <TransContext.Provider value={value}>

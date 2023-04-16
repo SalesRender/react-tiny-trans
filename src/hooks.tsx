@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useNeedUpdate, useTransContext } from './TransProvider';
-import { TranslateProps, Variables } from './types';
+import { TranslateProps, Variables, ModuleType } from './types';
 
 export const useTranslate = <Locale extends string = string, T extends Variables = Variables>(
-  module?: string | TemplateStringsArray
+  module?: ModuleType
 ): TranslateProps<Locale, T> => {
   const { trans, locale } = useTransContext<Locale>();
   const updatedTrigger = useNeedUpdate();
@@ -16,9 +16,9 @@ export const useTranslate = <Locale extends string = string, T extends Variables
 };
 
 export const withTranslate =
+  (module?: ModuleType) =>
   <P, Locale extends string = string, T extends Variables = Variables>(
-    Component: React.ComponentType<P & TranslateProps<Locale, T>>,
-    module?: string | TemplateStringsArray
+    Component: React.ComponentType<P & TranslateProps<Locale, T>>
   ) =>
   (props: P): React.ReactElement => {
     const trans = useTranslate<Locale>(module);
